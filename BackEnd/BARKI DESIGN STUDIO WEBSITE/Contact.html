@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="icon" href="./Asste/Image/main header image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ef955a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ef955a;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ef955a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #ef955a;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: #ef955a;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Video Banner Section */
+        .video-banner {
+            margin-top: 80px;
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(239, 149, 90, 0.8) 0%, rgba(247, 119, 55, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .video-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .video-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .video-iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info {
+            animation: slideInLeft 1s ease;
+        }
+
+        .contact-info h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .contact-items {
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ef955a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .contact-details p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            animation: slideInRight 1s ease;
+        }
+
+        .contact-form h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ef955a;
+            box-shadow: 0 0 0 3px rgba(239, 149, 90, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            background-color: #ef955a;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #e67e3a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.3);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .map-header h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .map-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .map-wrapper {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .map-overlay h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .map-overlay p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-header h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .faq-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #ef955a;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 30px 25px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button-white {
+            background-color: white;
+            color: #ef955a;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ef955a;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #ef955a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+
+        .success-message.show {
+            right: 20px;
+        }
+
+        .success-message i {
+            font-size: 24px;
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(239, 149, 90, 0.4);
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(239, 149, 90, 0.5);
+        }
+
+        .chatbot-toggle i {
+            font-size: 24px;
+        }
+
+        .chatbot-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-box.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .chatbot-header {
+            background-color: #ef955a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.bot {
+            background-color: #f1f1f1;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background-color: #ef955a;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chatbot-input-container {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 10px 15px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chatbot-input:focus {
+            border-color: #ef955a;
+        }
+
+        .chatbot-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-send:hover {
+            background-color: #e0854a;
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            max-width: 80px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background-color: #999;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .chatbot-quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-reply {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-reply:hover {
+            background-color: #ef955a;
+            color: white;
+            border-color: #ef955a;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .video-content h1 {
+                font-size: 32px;
+            }
+
+            .map-overlay {
+                position: static;
+                margin-bottom: 20px;
+            }
+            
+            .chatbot-box {
+                width: calc(100vw - 40px);
+                right: -10px;
+                height: 450px;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./Asste/Image/BARKI_LOGO__2_-removebg-preview.png" alt="Logo" style="height: 50px;" width="80px">
+            </div>
+            <ul class="nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./About.html">About</a></li>
+                <li><a href="./Portfolio.html">Portfolio</a></li>
+                <li><a href="./Buy Plan.html">Buy Plan</a></li>
+                <li><a href="./Services.html">Services</a></li>
+                <li><a href="./Social Media.html">Social Media</a></li>
+                <li><a href="./Contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Video Banner Section -->
+    <section class="video-banner">
+        <div class="video-overlay">
+            <div class="video-content">
+                <h1>Get in Touch</h1>
+                <p>Let's bring your dream home to life together. We're here to help you every step of the way.</p>
+                <a href="#contact-form" class="cta-button-white">Contact Us Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact-form">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Let's Create Something Amazing</h2>
+                <p>Have a project in mind? We'd love to hear about it. Fill out the form or reach out directly using the information below.</p>
+                
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Visit Our Office</h3>
+                            <p>5900 Balcones drive 11610, Austin, TX, United States, 78731</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Call Us</h3>
+                            <p>+1 (672) 572-3673</p>
+                            <p>Mon-Sun: 8AM-5PM</p>
+                            <h3>Whatsapp</h3>
+                            <p>+1 (346) 506-4592</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Us</h3>
+                            <p>Barkidesignstudiollc@gmail.com</p>
+                            <p>info@Barkidesignstudio.com</p>
+                            <p>support@Barkidesignstudio.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Business Hours</h3>
+                            <p>Monday - Sunday: 8:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="project">New Project</option>
+                            <option value="support">Technical Support</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your project or inquiry..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <div class="map-header">
+                <h2>Find Us Here</h2>
+                <p>Visit our studio to see our work and discuss your project in person</p>
+            </div>
+            <div class="map-wrapper">
+                <div class="map-overlay">
+                    <h3>BARKI DESIGN STUDIO</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> United States</p>
+                    <p>5900 Balcones drive 11610, Austin, TX, United States, 78731</p>
+                    <p><i class="fas fa-phone"></i>+1 (672) 572-3673</p>
+                </div>
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d187098.74536124224!2d68.48325330347971!3d25.35818161682989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644cae2feb064b3%3A0xfbcc19243aa6ddc0!2s5900%20Balcones%20Dr%2C%20Austin%2C%20TX%2078731%2C%20USA!5e0!3m2!1sen!2s!4v1770222282605!5m2!1sen!2s" width="1200" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+<!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+          <center>  <h2 class="section-title">Frequently Asked Questions</h2></center>
+            <br><br>
+            <div class="faq-item">
+                <div class="faq-question">
+                  MEP Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>
+Mechanical, Electrical, and Plumbing design services to get your project running smoothly.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Architectural Design Services 
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Custom design solutions for residential and commercial projects, tailored to your needs and budget.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                   Site Plan Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p> Expert site planning to ensure your project meets local regulations and maximizes space.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                   Structural Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p> Robust structural design solutions to ensure your project's stability and safety.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Civil Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p> Comprehensive civil design services to ensure your project is built on solid ground..</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Get in touch with our team today to discuss your design needs and bring your vision to life.</p>
+            <a href="#contact-form" class="cta-button-white">Contact Us Now</a>
+        </div>
+    </section>
+
+      <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BARKI DESIGN STUDIO</h3>
+                <p>Build your dream home with us Modern designs • Quality materials • Trusted construction Because your home deserves the best.
+
+</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="./index.html">Home</a></p>
+                <p><a href="./About.html">About Us</a></p>
+                <p><a href="./Services.html">Services</a></p>
+                <p><a href="./Portfolio.html">Portfolio</a></p>
+                <p><a href="./Buy Plan.html">Buy Plan</a></p>
+                <p><a href="./Contact.html">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                 <p><a href="#">Architecture design </a></p>
+                <p><a href="#">Site plan design </a></p>
+                <p><a href="#">MEP design </a></p>
+                <p><a href="#">Structure design </a></p>
+                <p><a href="#">Civil design </a></p>
+                <p><a href="#">3d rendering</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i>5900 Balcones drive 11610, Austin, TX, United States, 78731</p>
+                <p><i class="fas fa-phone"></i>+1 (672) 572-3673</p>
+                <p><i class="fas fa-envelope"></i> info@Barkidesignstudio.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sun: 8AM-5PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Barki Design Studio All rights reserved | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <div>
+            <strong>Message Sent!</strong>
+            <p>We'll get back to you soon.</p>
+        </div>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-box" id="chatbotBox">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> BARKI Assistant</h3>
+                <div class="chatbot-status">
+                    <div class="status-dot"></div>
+                    <span>Online</span>
+                </div>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    Hello! I'm the BARKI Assistant. How can I help you today?
+                    <div class="message-time">Just now</div>
+                </div>
+                <div class="message bot">
+                    You can ask me about our services, contact information, or how to get started with your project.
+                    <div class="message-time">Just now</div>
+                    <div class="chatbot-quick-replies">
+                        <div class="quick-reply">Tell me about your services</div>
+                        <div class="quick-reply">How can I contact you?</div>
+                        <div class="quick-reply">What are your business hours?</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
+                <button class="chatbot-send" id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 5%';
+                header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.padding = '15px 5%';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = {
+                name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            try {
+                const response = await fetch('/api/contact/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.classList.add('show');
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 5000);
+                } else {
+                    throw new Error(result.message || 'Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting contact form:', error);
+                alert('Error sending message: ' + error.message);
+            }
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply observer to contact items
+        document.querySelectorAll('.contact-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+
+        // Apply observer to FAQ items
+        document.querySelectorAll('.faq-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+
+        // Form input animations
+        const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+
+        // Parallax effect for video banner
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const videoOverlay = document.querySelector('.video-overlay');
+            if (videoOverlay && scrolled < 500) {
+                videoOverlay.style.transform = `translateY(${scrolled * 0.5}px)`;
+                videoOverlay.style.opacity = 1 - scrolled / 500;
+            }
+        });
+
+        // Contact item hover effects
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.querySelector('.contact-icon').style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.querySelector('.contact-icon').style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Map interaction
+        const mapWrapper = document.querySelector('.map-wrapper');
+        const mapOverlay = document.querySelector('.map-overlay');
+        
+        mapWrapper.addEventListener('mouseenter', function() {
+            mapOverlay.style.transform = 'translateY(-10px)';
+        });
+        
+        mapWrapper.addEventListener('mouseleave', function() {
+            mapOverlay.style.transform = 'translateY(0)';
+        });
+
+        // Form validation feedback
+        const requiredFields = document.querySelectorAll('[required]');
+        requiredFields.forEach(field => {
+            field.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#ff4444';
+                this.style.boxShadow = '0 0 0 3px rgba(255, 68, 68, 0.1)';
+            });
+            
+            field.addEventListener('input', function() {
+                if (this.validity.valid) {
+                    this.style.borderColor = '#4CAF50';
+                    this.style.boxShadow = '0 0 0 3px rgba(76, 175, 80, 0.1)';
+                } else {
+                    this.style.borderColor = '#f0f0f0';
+                    this.style.boxShadow = 'none';
+                }
+            });
+        });
+
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotBox = document.getElementById('chatbotBox');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+
+        // Toggle chatbot
+        chatbotToggle.addEventListener('click', function() {
+            chatbotBox.classList.toggle('active');
+            if (chatbotBox.classList.contains('active')) {
+                chatbotToggle.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                chatbotToggle.innerHTML = '<i class="fas fa-comments"></i>';
+            }
+        });
+
+        // Close chatbot
+        chatbotClose.addEventListener('click', function() {
+            chatbotBox.classList.remove('active');
+            chatbotToggle.innerHTML = '<i class="fas fa-comments"></i>';
+        });
+
+        // Function to get current time
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // Function to add message to chat
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            
+            const messageText = document.createElement('div');
+            messageText.textContent = message;
+            messageDiv.appendChild(messageText);
+            
+            const messageTime = document.createElement('div');
+            messageTime.className = 'message-time';
+            messageTime.textContent = getCurrentTime();
+            messageDiv.appendChild(messageTime);
+            
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        // Function to show typing indicator
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            
+            for (let i = 0; i < 3; i++) {
+                const span = document.createElement('span');
+                typingDiv.appendChild(span);
+            }
+            
+            chatbotMessages.appendChild(typingDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            return typingDiv;
+        }
+
+        // Function to remove typing indicator
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Function to generate bot response
+        function generateBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Simple keyword-based responses
+            if (lowerMessage.includes('service') || lowerMessage.includes('offer')) {
+                return "We offer a comprehensive range of design services including architectural design, structural design, MEP design, civil design, site plan design, and 3D rendering. Our team works with both residential and commercial projects to bring your vision to life.";
+            } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email') || lowerMessage.includes('address')) {
+                return "You can reach us at:\nPhone: +1 (672) 572-3673\nEmail: info@Barkidesignstudio.com\nAddress: 5900 Balcones drive 11610, Austin, TX, United States, 78731\n\nOur office hours are Monday to Sunday, 8AM-5PM.";
+            } else if (lowerMessage.includes('hour') || lowerMessage.includes('time') || lowerMessage.includes('open')) {
+                return "We're open Monday through Sunday, from 8:00 AM to 5:00 PM. You can also reach us via email at info@Barkidesignstudio.com or through our contact form on this page.";
+            } else if (lowerMessage.includes('project') || lowerMessage.includes('start') || lowerMessage.includes('begin')) {
+                return "To start a project with us, you can fill out the contact form on this page or call us directly at +1 (672) 572-3673. We'll schedule a consultation to discuss your requirements and provide a detailed quote.";
+            } else if (lowerMessage.includes('quote') || lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                return "Project costs vary based on scope, complexity, and specific requirements. After an initial consultation to understand your needs, we'll provide a detailed quote with no obligations. Contact us to schedule a consultation.";
+            } else if (lowerMessage.includes('appointment') || lowerMessage.includes('consultation') || lowerMessage.includes('meeting')) {
+                return "We'd be happy to schedule a consultation with you! You can call us at +1 (672) 572-3673 or fill out the contact form with your preferred date and time. We'll get back to you to confirm.";
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return "Hello! Thank you for reaching out to Barki Design Studio. How can I assist you with your design needs today?";
+            } else {
+                return "Thank you for your question. For more specific information about your project, I recommend scheduling a consultation with one of our design experts. Is there anything else I can help you with?";
+            }
+        }
+
+        // Function to add quick replies to a bot message
+        function addQuickReplies(messageDiv, replies) {
+            const quickRepliesDiv = document.createElement('div');
+            quickRepliesDiv.className = 'chatbot-quick-replies';
+            
+            replies.forEach(reply => {
+                const quickReply = document.createElement('div');
+                quickReply.className = 'quick-reply';
+                quickReply.textContent = reply;
+                quickReply.addEventListener('click', function() {
+                    chatbotInput.value = reply;
+                    sendMessage();
+                });
+                quickRepliesDiv.appendChild(quickReply);
+            });
+            
+            messageDiv.appendChild(quickRepliesDiv);
+        }
+
+        // Function to send message
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message
+            addMessage(message, true);
+            
+            // Clear input
+            chatbotInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = showTypingIndicator();
+            
+            // Generate and show bot response after a delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = generateBotResponse(message);
+                const botMessageDiv = addMessage(response);
+                
+                // Add relevant quick replies based on the response
+                if (message.toLowerCase().includes('service') || message.toLowerCase().includes('offer')) {
+                    addQuickReplies(botMessageDiv, [
+                        'How can I contact you?',
+                        'What are your business hours?',
+                        'How do I start a project?'
+                    ]);
+                } else if (message.toLowerCase().includes('contact') || message.toLowerCase().includes('phone')) {
+                    addQuickReplies(botMessageDiv, [
+                        'Tell me about your services',
+                        'What are your business hours?',
+                        'How do I start a project?'
+                    ]);
+                } else if (message.toLowerCase().includes('project') || message.toLowerCase().includes('start')) {
+                    addQuickReplies(botMessageDiv, [
+                        'How much does it cost?',
+                        'How can I schedule a consultation?',
+                        'Tell me about your services'
+                    ]);
+                } else if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
+                    addQuickReplies(botMessageDiv, [
+                        'Tell me about your services',
+                        'How can I contact you?',
+                        'What are your business hours?'
+                    ]);
+                }
+            }, 1500);
+        }
+
+        // Send message on button click
+        chatbotSend.addEventListener('click', sendMessage);
+
+        // Send message on Enter key
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Add click event to existing quick replies
+        document.querySelectorAll('.quick-reply').forEach(reply => {
+            reply.addEventListener('click', function() {
+                chatbotInput.value = this.textContent;
+                sendMessage();
+            });
+        });
+    </script>
+</body>
+</html>

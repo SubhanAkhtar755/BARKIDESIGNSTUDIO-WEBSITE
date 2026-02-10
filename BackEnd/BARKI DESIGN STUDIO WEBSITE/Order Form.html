@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="icon" href="./Asste/Image/main header image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ef955a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ef955a;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ef955a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: #ef955a;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .order-form {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Selected Plan */
+        .selected-plan {
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #eee;
+        }
+
+        .plan-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .plan-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .plan-info {
+            flex-grow: 1;
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .plan-details {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .plan-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ef955a;
+        }
+
+        /* Form Groups */
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #ef955a;
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-group label span {
+            color: #ef955a;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ef955a;
+            box-shadow: 0 0 0 3px rgba(239, 149, 90, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Additional Options */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-card {
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .option-card:hover {
+            border-color: #ef955a;
+            background-color: #f8f8f8;
+        }
+
+        .option-card.selected {
+            border-color: #ef955a;
+            background-color: rgba(239, 149, 90, 0.1);
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .option-price {
+            color: #ef955a;
+            font-weight: 600;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #ef955a;
+            background-color: #f8f8f8;
+        }
+
+        .payment-method.selected {
+            border-color: #ef955a;
+            background-color: rgba(239, 149, 90, 0.1);
+        }
+
+        .payment-method i {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .payment-method.selected i {
+            color: #ef955a;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row:last-of-type {
+            border-bottom: none;
+            padding-top: 10px;
+            border-top: 2px solid #ddd;
+            margin-top: 10px;
+        }
+
+        .summary-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .summary-total {
+            font-size: 18px;
+            color: #ef955a;
+        }
+
+        /* Submit Button */
+        .submit-section {
+            margin-top: 30px;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .terms-checkbox input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        .terms-checkbox label {
+            font-size: 14px;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .terms-checkbox a {
+            color: #ef955a;
+            text-decoration: none;
+        }
+
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-button {
+            width: 100%;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .submit-button:hover {
+            background-color: #e67e3a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .submit-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Security Badge */
+        .security-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .security-info i {
+            color: #22c55e;
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ef955a;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #ef955a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                flex-direction: column;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+       <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./Asste/Image/BARKI_LOGO__2_-removebg-preview.png" alt="Logo" style="height: 50px;" width="80px">
+            </div>
+            <ul class="nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./About.html">About</a></li>
+                <li><a href="./Portfolio.html">Portfolio</a></li>
+                <li><a href="./Buy Plan.html">Buy Plan</a></li>
+                <li><a href="./Services.html">Services</a></li>
+                <li><a href="./Social Media.html">Social Media</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="order-form">
+            <h1 class="page-title">Complete Your Order</h1>
+            <p class="page-subtitle">Secure checkout for your house plan</p>
+
+           
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    Contact Information
+                </h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span>*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span>*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span>*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number <span>*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+
+            <!-- Service Information -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Service Information
+                </h2>
+                <div class="form-group">
+                    <label for="serviceName">Service Name <span>*</span></label>
+                    <input type="text" id="serviceName" name="serviceName" placeholder="e.g. House Plan Design" required>
+                </div>
+                <div class="form-group">
+                    <label for="packagePrice">Package Price <span>*</span></label>
+                    <input type="number" id="packagePrice" name="packagePrice" placeholder="Enter package price" required>
+                </div>
+                <div class="form-group">
+                    <label for="priceProofFile">Price Proof File (Optional)</label>
+                    <input type="file" id="priceProofFile" name="priceProofFile" accept="image/*,.pdf,.doc,.docx">
+                    <small>Upload proof of package price (screenshot, document, etc.)</small>
+                </div>
+            </div>
+
+            <!-- Address Information -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Address Information
+                </h2>
+                <div class="form-group">
+                    <label for="country">Country <span>*</span></label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address <span>*</span></label>
+                    <input type="text" id="address" name="address" placeholder="Full address" required>
+                </div>
+            </div>
+
+            <!-- Additional Options -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Additional Options
+                </h2>
+                <div class="options-grid">
+                    <div class="option-card" data-option="pdf" data-price="150">
+                        <div class="option-title">PDF Set</div>
+                        <div class="option-price">+$150</div>
+                    </div>
+                    <div class="option-card" data-option="cad" data-price="250">
+                        <div class="option-title">CAD File</div>
+                        <div class="option-price">+$250</div>
+                    </div>
+                    <div class="option-card" data-option="report" data-price="200">
+                        <div class="option-title">Cost Report</div>
+                        <div class="option-price">+$200</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-credit-card"></i>
+                    Payment Method
+                </h2>
+                <div class="payment-methods">
+                    <div class="payment-method selected" data-method="card">
+                        <i class="fas fa-credit-card"></i>
+                        <div>Credit Card</div>
+                    </div>
+                    <div class="payment-method" data-method="paypal">
+                        <i class="fab fa-paypal"></i>
+                        <div>PayPal</div>
+                    </div>
+                </div>
+
+                <!-- Card Details -->
+                <div id="cardDetails">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number <span>*</span></label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardName">Cardholder Name <span>*</span></label>
+                        <input type="text" id="cardName" name="cardName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry">Expiry Date <span>*</span></label>
+                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV <span>*</span></label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Submit Section -->
+            <div class="submit-section">
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="#">Terms of Service</a> and understand that all sales are final.
+                    </label>
+                </div>
+                <button type="submit" class="submit-button" id="submitOrder">
+                    Complete Order
+                </button>
+                <div class="security-info">
+                    <i class="fas fa-lock"></i>
+                    Secure SSL Encrypted Checkout
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BARKI DESIGN STUDIO</h3>
+                <p>Build your dream home with us Modern designs • Quality materials • Trusted construction Because your home deserves the best.
+
+</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="./index.html">Home</a></p>
+                <p><a href="./About.html">About Us</a></p>
+                <p><a href="./Services.html">Services</a></p>
+                <p><a href="./Portfolio.html">Portfolio</a></p>
+                <p><a href="./Buy Plan.html">Buy Plan</a></p>
+                <p><a href="./Contact.html">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p><a href="#">Architecture design </a></p>
+                <p><a href="#">Site plan design </a></p>
+                <p><a href="#">MEP design </a></p>
+                <p><a href="#">Structure design </a></p>
+                <p><a href="#">Civil design </a></p>
+                <p><a href="#">3d rendering</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i>5900 Balcones drive 11610, Austin, TX, United States, 78731</p>
+                <p><i class="fas fa-phone"></i>+1 (672) 572‑3673</p>
+                <p><i class="fas fa-envelope"></i> info@Barkidesignstudio.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sun: 8AM-5PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Barki Design Studio All rights reserved | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Payment method selection
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const cardDetails = document.getElementById('cardDetails');
+                if (this.dataset.method === 'card') {
+                    cardDetails.style.display = 'block';
+                } else {
+                    cardDetails.style.display = 'none';
+                }
+            });
+        });
+
+        // Additional options selection
+        document.querySelectorAll('.option-card').forEach(option => {
+            option.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                updateOrderSummary();
+            });
+        });
+
+        // Update order summary
+        function updateOrderSummary() {
+            const basePrice = 1250;
+            let additionalTotal = 0;
+            const additionalItems = document.getElementById('additionalItems');
+            additionalItems.innerHTML = '';
+            
+            document.querySelectorAll('.option-card.selected').forEach(option => {
+                const price = parseFloat(option.dataset.price);
+                additionalTotal += price;
+                
+                const item = document.createElement('div');
+                item.className = 'summary-row';
+                item.innerHTML = `
+                    <span class="summary-label">${option.querySelector('.option-title').textContent}</span>
+                    <span class="summary-value">+$${price.toFixed(2)}</span>
+                `;
+                additionalItems.appendChild(item);
+            });
+            
+            const subtotal = basePrice + additionalTotal;
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+            
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Form submission
+        document.getElementById('submitOrder').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            const requiredFields = document.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    isValid = false;
+                    field.style.borderColor = '#ef4444';
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            if (!document.getElementById('terms').checked) {
+                isValid = false;
+                alert('Please accept terms and conditions');
+            }
+            
+            if (isValid) {
+                this.textContent = 'Processing...';
+                this.disabled = true;
+                
+                try {
+                    const formData = new FormData();
+                    
+                    // Add form fields
+                    formData.append('firstName', document.getElementById('firstName').value);
+                    formData.append('lastName', document.getElementById('lastName').value);
+                    formData.append('email', document.getElementById('email').value);
+                    formData.append('phone', document.getElementById('phone').value);
+                    formData.append('country', document.getElementById('country').value);
+                    formData.append('address', document.getElementById('address').value);
+                    formData.append('serviceName', document.getElementById('serviceName').value);
+                    formData.append('packagePrice', document.getElementById('packagePrice').value);
+                    formData.append('cardNumber', document.getElementById('cardNumber').value);
+                    formData.append('cardName', document.getElementById('cardName').value);
+                    formData.append('expiryDate', document.getElementById('expiry').value);
+                    formData.append('cvv', document.getElementById('cvv').value);
+                    
+                    // Add file if selected
+                    const priceProofFile = document.getElementById('priceProofFile').files[0];
+                    if (priceProofFile) {
+                        formData.append('priceProofFile', priceProofFile);
+                    }
+                    
+                    const response = await fetch('/api/order/submit', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert('Order placed successfully! You will receive your house plans via email within 24 hours.');
+                        this.textContent = 'Order Complete ✓';
+                        this.style.backgroundColor = '#22c55e';
+                        
+                        // Reset form
+                        document.querySelector('.order-form').reset();
+                    } else {
+                        throw new Error(result.message || 'Order submission failed');
+                    }
+                } catch (error) {
+                    console.error('Error submitting order:', error);
+                    alert('Error placing order: ' + error.message);
+                    this.textContent = 'Complete Order';
+                    this.disabled = false;
+                }
+            }
+        });
+
+        // Format inputs
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 5%';
+                header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.padding = '15px 5%';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>

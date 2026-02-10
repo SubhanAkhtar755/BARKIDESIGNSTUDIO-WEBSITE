@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - BARKI DESIGN STUDIO</title>
+    <link rel="icon" href="./Asste/Image/main header image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .admin-header {
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Container */
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tabs */
+        .admin-tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* Tab Buttons */
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            margin-right: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(239, 149, 90, 0.4);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #f8f8f8;
+            transform: translateY(-1px);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Filters */
+        .filters-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .filter-group input {
+            padding: 10px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .apply-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .reset-btn {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e1e1e1;
+        }
+
+        .reset-btn:hover {
+            background: #e9ecef;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: #f8f8f8;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-new {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-completed {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        /* Image Preview */
+        .image-preview {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .image-preview:hover {
+            transform: scale(1.1);
+        }
+
+        /* Message Cell */
+        .message-cell {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .message-cell:hover {
+            color: #667eea;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 95%;
+            max-height: 95%;
+            overflow: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-message {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            line-height: 1.6;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 32px;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Admin Panel - Popup Tab */
+        .popup-email {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .popup-message-cell {
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .popup-icon {
+            color: #667eea;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .popup-icon:hover {
+            color: #5a6fd8;
+        }
+
+        .popup-container {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Eye Icon */
+        .message-icon {
+            color: #667eea;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .message-icon:hover {
+            color: #5a6fd8;
+        }
+
+        .message-container {
+            display: flex;
+            align-items: center;
+            max-width: 200px;
+        }
+
+        .message-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+            cursor: default;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: 1px solid #e1e1e1;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #f8f9fa;
+        }
+
+        .pagination button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .loading i {
+            font-size: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .admin-tabs {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .tab-btn {
+                margin-right: 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .data-table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .data-table {
+                min-width: 600px;
+                font-size: 12px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 12px 8px;
+            }
+
+            .admin-container {
+                padding: 20px 10px;
+            }
+
+            .logout-btn {
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-header {
+                padding: 15px 0;
+            }
+
+            .admin-container {
+                padding: 15px 5px;
+            }
+
+            .data-table {
+                min-width: 500px;
+                font-size: 11px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px 6px;
+            }
+
+            .login-container {
+                padding: 20px;
+                margin: 10px;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <h1>
+                <i class="fas fa-cogs"></i>
+                Admin Panel
+            </h1>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="admin-container">
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="switchTab('contacts', this)">
+                <i class="fas fa-envelope"></i>
+                Contact Forms
+            </button>
+            <button class="tab-btn" onclick="switchTab('orders', this)">
+                <i class="fas fa-shopping-cart"></i>
+                Orders
+            </button>
+            <button class="tab-btn" onclick="switchTab('popups', this)">
+                <i class="fas fa-bullhorn"></i>
+                Popups
+            </button>
+        </div>
+
+        <!-- Contacts Tab -->
+        <div id="contacts-tab" class="tab-content active">
+            <!-- Data Table -->
+            <div class="data-table-container">
+                <div id="contacts-loading" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    Loading contact data...
+                </div>
+                <table class="data-table" id="contacts-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contacts-tbody">
+                        <!-- Data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="contacts-pagination">
+                <!-- Pagination will be generated here -->
+            </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="orders-tab" class="tab-content">
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="order-search">Search</label>
+                        <input type="text" id="order-search" placeholder="Search by name, email, service...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="order-start-date">Start Date</label>
+                        <input type="date" id="order-start-date">
+                    </div>
+                    <div class="filter-group">
+                        <label for="order-end-date">End Date</label>
+                        <input type="date" id="order-end-date">
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="filter-btn apply-btn" onclick="applyOrderFilters()">
+                        <i class="fas fa-filter"></i>
+                        Apply Filters
+                    </button>
+                    <button class="filter-btn reset-btn" onclick="resetOrderFilters()">
+                        <i class="fas fa-redo"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="data-table-container">
+                <div id="orders-loading" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    Loading order data...
+                </div>
+                <table class="data-table" id="orders-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Service</th>
+                            <th>Price</th>
+                            <th>Country</th>
+                            <th>Proof</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        <!-- Data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="orders-pagination">
+                <!-- Pagination will be generated here -->
+            </div>
+        </div>
+
+        <!-- Popups Tab -->
+        <div id="popups-tab" class="tab-content">
+            <!-- Data Table -->
+            <div class="data-table-container">
+                <div id="popups-loading" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    Loading popup data...
+                </div>
+                <table class="data-table" id="popups-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Email</th>
+                            <th></th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="popups-tbody">
+                        <!-- Data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="popups-pagination">
+                <!-- Pagination will be generated here -->
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Check if admin is logged in
+        if (!sessionStorage.getItem('isAdminLoggedIn')) {
+            window.location.href = '/loginadmin.html';
+        }
+
+        // Global variables
+        let currentTab = 'contacts';
+        let contactsPage = 1;
+        let ordersPage = 1;
+        let popupsPage = 1;
+        const itemsPerPage = 10;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Admin panel loaded');
+            loadContacts();
+        });
+
+        // Tab switching
+        function switchTab(tab, element) {
+            console.log('Switching to tab:', tab);
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Show selected tab content
+            const tabContent = document.getElementById(`${tab}-tab`);
+            if (tabContent) {
+                tabContent.style.display = 'block';
+                console.log('Tab content shown:', tab);
+            }
+
+            currentTab = tab;
+
+            // Clear all tables first
+            document.getElementById('contacts-tbody').innerHTML = '';
+            document.getElementById('orders-tbody').innerHTML = '';
+            document.getElementById('popups-tbody').innerHTML = '';
+
+            // Hide all tables first
+            document.getElementById('contacts-table').style.display = 'none';
+            document.getElementById('orders-table').style.display = 'none';
+            document.getElementById('popups-table').style.display = 'none';
+
+            // Load data for active tab
+            if (tab === 'contacts') {
+                console.log('Loading contacts');
+                loadContacts();
+            } else if (tab === 'orders') {
+                console.log('Loading orders');
+                loadOrders();
+            } else if (tab === 'popups') {
+                console.log('Loading popups');
+                loadPopups();
+            }
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('isAdminLoggedIn');
+            window.location.href = '/loginadmin.html';
+        }
+
+        // Load contacts
+        async function loadContacts(page = 1) {
+            contactsPage = page;
+            
+            console.log('Loading contacts...');
+            
+            try {
+                const response = await fetch(`/api/contact/all?page=${page}&limit=50`);
+                console.log('Contacts response status:', response.status);
+                const result = await response.json();
+                console.log('Contacts result:', result);
+
+                if (result.success) {
+                    displayContacts(result.data);
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error('Error loading contacts:', error);
+                document.getElementById('contacts-loading').innerHTML = 
+                    '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading contacts</p></div>';
+            }
+        }
+
+        // Load orders
+        async function loadOrders(page = 1) {
+            ordersPage = page;
+            
+            console.log('Loading orders...');
+            
+            try {
+                const response = await fetch(`/api/order/all?page=${page}&limit=50`);
+                console.log('Orders response status:', response.status);
+                const result = await response.json();
+                console.log('Orders result:', result);
+
+                if (result.success) {
+                    displayOrders(result.data);
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('orders-loading').innerHTML = 
+                    '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading orders</p></div>';
+            }
+        }
+
+        // Display contacts
+        function displayContacts(contacts) {
+            console.log('Contacts received:', contacts.length);
+            
+            const tbody = document.getElementById('contacts-tbody');
+            const table = document.getElementById('contacts-table');
+            const loading = document.getElementById('contacts-loading');
+
+            if (contacts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px;">No contacts found</td></tr>';
+            } else {
+                let html = '';
+                for (let i = 0; i < contacts.length; i++) {
+                    const contact = contacts[i];
+                    html += '<tr>';
+                    html += '<td>' + new Date(contact.createdAt).toLocaleDateString() + '</td>';
+                    html += '<td>' + (contact.name || '') + '</td>';
+                    html += '<td>' + (contact.email || '') + '</td>';
+                    html += '<td>' + (contact.subject || '') + '</td>';
+                    html += '<td>';
+                    html += '<div style="display: flex; align-items: center;">';
+                    html += '<div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + (contact.message || '').substring(0, 80) + ((contact.message || '').length > 80 ? '...' : '') + '</div>';
+                    html += '<i class="fas fa-eye" style="margin-left: 8px; color: #667eea; cursor: pointer;" onclick="showMessageModal(' + i + ')" title="View full message"></i>';
+                    html += '</div>';
+                    html += '</td>';
+                    html += '<td><span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">New</span></td>';
+                    html += '</tr>';
+                }
+                tbody.innerHTML = html;
+                console.log('Contacts HTML set, length:', html.length);
+                
+                // Store contacts data for modal access
+                window.contactsData = contacts;
+            }
+
+            loading.style.display = 'none';
+            table.style.display = 'table';
+            table.style.visibility = 'visible';
+            table.style.opacity = '1';
+            table.style.position = 'relative';
+            table.style.zIndex = '10';
+            
+            console.log('Contacts table should be visible now');
+        }
+
+        // Load popups
+        async function loadPopups(page = 1) {
+            popupsPage = page;
+            
+            console.log('Loading popups...');
+            
+            try {
+                const response = await fetch(`/api/popup/all?page=${page}&limit=50`);
+                console.log('Popups response status:', response.status);
+                const result = await response.json();
+                console.log('Popups result:', result);
+
+                if (result.success) {
+                    displayPopups(result.data);
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                console.error('Error loading popups:', error);
+                document.getElementById('popups-loading').innerHTML = 
+                    '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading popups</p></div>';
+            }
+        }
+
+        // Display popups
+        function displayPopups(popups) {
+            console.log('Popups received:', popups.length);
+            
+            const tbody = document.getElementById('popups-tbody');
+            const table = document.getElementById('popups-table');
+            const loading = document.getElementById('popups-loading');
+
+            if (popups.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 40px;">No popups found</td></tr>';
+            } else {
+                let html = '';
+                for (let i = 0; i < popups.length; i++) {
+                    const popup = popups[i];
+                    html += '<tr>';
+                    html += '<td>' + new Date(popup.createdAt).toLocaleDateString() + '</td>';
+                    html += '<td>' + (popup.email || '') + '</td>';
+                    html += '<td>';
+                    html += '<div style="display: flex; align-items: center;">';
+                    html += '</div>';
+                  
+                    html += '<td><span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">New</span></td>';
+                    html += '</tr>';
+                }
+                tbody.innerHTML = html;
+                console.log('Popups HTML set, length:', html.length);
+                
+                // Store popups data for modal access
+                window.popupsData = popups;
+            }
+
+            loading.style.display = 'none';
+            table.style.display = 'table';
+            table.style.visibility = 'visible';
+            table.style.opacity = '1';
+            table.style.position = 'relative';
+            table.style.zIndex = '10';
+            
+            console.log('Popups table should be visible now');
+        }
+        // Display orders
+        function displayOrders(orders) {
+            console.log('Orders received:', orders.length);
+            
+            const tbody = document.getElementById('orders-tbody');
+            const table = document.getElementById('orders-table');
+            const loading = document.getElementById('orders-loading');
+
+            if (orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">No orders found</td></tr>';
+            } else {
+                let html = '';
+                for (let i = 0; i < orders.length; i++) {
+                    const order = orders[i];
+                    html += '<tr>';
+                    html += '<td>' + new Date(order.createdAt).toLocaleDateString() + '</td>';
+                    html += '<td>' + (order.firstName || '') + ' ' + (order.lastName || '') + '</td>';
+                    html += '<td>' + (order.email || '') + '</td>';
+                    html += '<td>' + (order.serviceName || '') + '</td>';
+                    html += '<td>$' + (order.packagePrice || 0) + '</td>';
+                    html += '<td>' + (order.country || '') + '</td>';
+                    html += '<td>';
+                    if (order.priceProofFile) {
+                        html += '<img src="' + order.priceProofFile + '" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px; cursor: pointer;" onclick="showImageModal(\'' + order.priceProofFile + '\')" alt="Proof">';
+                    } else {
+                        html += '<span style="color: #999;">No file</span>';
+                    }
+                    html += '</td>';
+                    html += '</tr>';
+                }
+                tbody.innerHTML = html;
+                console.log('Orders HTML set, length:', html.length);
+            }
+
+            loading.style.display = 'none';
+            table.style.display = 'table';
+            table.style.visibility = 'visible';
+            table.style.opacity = '1';
+            table.style.position = 'relative';
+            table.style.zIndex = '10';
+            
+            console.log('Orders table should be visible now');
+        }
+
+        // Update pagination
+        function updatePagination(type, pagination) {
+            const container = document.getElementById(`${type}-pagination`);
+            const { page, pages } = pagination;
+
+            let html = '';
+            
+            // Previous button
+            html += `<button ${page === 1 ? 'disabled' : ''} onclick="load${type === 'contacts' ? 'Contacts' : 'Orders'}(${page - 1})">
+                <i class="fas fa-chevron-left"></i>
+            </button>`;
+
+            // Page numbers
+            for (let i = 1; i <= pages; i++) {
+                if (i === page) {
+                    html += `<button class="active">${i}</button>`;
+                } else if (Math.abs(i - page) <= 2 || i === 1 || i === pages) {
+                    html += `<button onclick="load${type === 'contacts' ? 'Contacts' : 'Orders'}(${i})">${i}</button>`;
+                } else if (Math.abs(i - page) === 3) {
+                    html += '<span>...</span>';
+                }
+            }
+
+            // Next button
+            html += `<button ${page === pages ? 'disabled' : ''} onclick="load${type === 'contacts' ? 'Contacts' : 'Orders'}(${page + 1})">
+                <i class="fas fa-chevron-right"></i>
+            </button>`;
+
+            container.innerHTML = html;
+        }
+
+        // Apply contact filters
+        function applyContactFilters() {
+            const filters = {
+                search: document.getElementById('contact-search').value,
+                startDate: document.getElementById('contact-start-date').value,
+                endDate: document.getElementById('contact-end-date').value
+            };
+            
+            loadContacts(1, filters);
+        }
+
+        // Reset contact filters
+        function resetContactFilters() {
+            document.getElementById('contact-search').value = '';
+            document.getElementById('contact-start-date').value = '';
+            document.getElementById('contact-end-date').value = '';
+            loadContacts();
+        }
+
+        // Apply order filters
+        function applyOrderFilters() {
+            const filters = {
+                search: document.getElementById('order-search').value,
+                startDate: document.getElementById('order-start-date').value,
+                endDate: document.getElementById('order-end-date').value
+            };
+            
+            loadOrders(1, filters);
+        }
+
+        // Apply popup filters
+        function applyPopupFilters() {
+            const filters = {
+                search: document.getElementById('popup-search').value,
+                startDate: document.getElementById('popup-start-date').value,
+                endDate: document.getElementById('popup-end-date').value
+            };
+            
+            loadPopups(1, filters);
+        }
+
+        // Reset popup filters
+        function resetPopupFilters() {
+            document.getElementById('popup-search').value = '';
+            document.getElementById('popup-start-date').value = '';
+            document.getElementById('popup-end-date').value = '';
+            loadPopups();
+        }
+
+        // Show image modal
+        function showImageModal(imageSrc) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="modal-close" onclick="closeModal()">&times;</span>
+                    <h3 style="margin-bottom: 20px; color: #333;">Proof Image</h3>
+                    <img src="${imageSrc}" class="modal-image" alt="Proof Image">
+                    <p style="margin-top: 15px; color: #666; font-size: 14px;">Click outside or press &times; to close</p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.style.display = 'block';
+        }
+
+        
+        function showMessageModal(index) {
+            // Close any existing modal first
+            closeModal();
+            
+            const contact = window.contactsData[index];
+            if (!contact) return;
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-message">
+                        <strong style="display: block; margin-bottom: 8px;">Message:</strong>
+                        <div style="line-height: 1.6; white-space: pre-wrap;">${contact.message}</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => modal.remove());
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.querySelector('.modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

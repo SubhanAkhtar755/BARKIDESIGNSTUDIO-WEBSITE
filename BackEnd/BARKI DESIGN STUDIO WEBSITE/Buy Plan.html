@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Plan</title>
+    <link rel="icon" href="./Asste/Image/main header image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles - Same as Original */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ef955a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ef955a;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ef955a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #ef955a;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: #ef955a;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Mobile Responsive */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Video Banner Section */
+        .video-banner {
+            margin-top: 80px;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(239, 149, 90, 0.8), rgba(247, 119, 55, 0.8));
+            z-index: 1;
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            max-width: 1200px;
+        }
+
+        .video-content h1 {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .video-content p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .video-play-btn {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .video-play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-play-btn i {
+            font-size: 40px;
+            color: #ef955a;
+            margin-left: 5px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        /* Services Plans Section */
+        .services-plans-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+        }
+
+        .services-plans-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .services-header h2 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .services-header p {
+            font-size: 20px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .service-box {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .service-box:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-box:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ef955a;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .service-content {
+            padding: 40px;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.3);
+        }
+
+        .service-icon i {
+            font-size: 36px;
+            color: white;
+        }
+
+        .service-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .service-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .service-price {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ef955a;
+        }
+
+        .price-period {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .service-features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features i {
+            color: #ef955a;
+            margin-right: 12px;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .buy-now-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-now-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .buy-now-btn:hover::before {
+            left: 100%;
+        }
+
+        .buy-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Features Comparison */
+        .features-comparison {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .comparison-header h2 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .comparison-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-icon {
+            font-size: 50px;
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .comparison-card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .comparison-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .testimonials-header h2 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 60px;
+            color: #ef955a;
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            margin-bottom: 20px;
+            color: #666;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-button-white {
+            background-color: white;
+            color: #ef955a;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer - Same as Original */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ef955a;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #ef955a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            padding: 100px 5%;
+            background-color: white;
+        }
+
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .projects-header h2 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .projects-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .project-box {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-box:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-box:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .view-project-btn {
+            background-color: #ef955a;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .project-box:hover .view-project-btn {
+            transform: translateY(0);
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-category {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #ef955a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .project-date {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .project-link {
+            color: #ef955a;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 10px;
+        }
+
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .load-more-btn {
+            background-color: #ef955a;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .load-more-btn:hover {
+            background-color: #e67e3a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(239, 149, 90, 0.4);
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(239, 149, 90, 0.5);
+        }
+
+        .chatbot-toggle i {
+            font-size: 24px;
+        }
+
+        .chatbot-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-box.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .chatbot-header {
+            background-color: #ef955a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.bot {
+            background-color: #f1f1f1;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background-color: #ef955a;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chatbot-input-container {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 10px 15px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chatbot-input:focus {
+            border-color: #ef955a;
+        }
+
+        .chatbot-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-send:hover {
+            background-color: #e0854a;
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            max-width: 80px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background-color: #999;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .chatbot-quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-reply {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-reply:hover {
+            background-color: #ef955a;
+            color: white;
+            border-color: #ef955a;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .video-content h1 {
+                font-size: 36px;
+            }
+
+            .video-content p {
+                font-size: 18px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-box {
+                width: calc(100vw - 40px);
+                right: -10px;
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./Asste/Image/BARKI_LOGO__2_-removebg-preview.png" alt="Logo" style="height: 50px;" width="80px">
+            </div>
+            <ul class="nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./About.html">About</a></li>
+                <li><a href="./Portfolio.html">Portfolio</a></li>
+                <li><a href="./Buy Plan.html" class="active">Buy Plan</a></li>
+                <li><a href="./Services.html">Services</a></li>
+                <li><a href="./Social Media.html">Social Media</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Video Banner Section -->
+    <section class="video-banner">
+        <div class="video-background">
+            <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="./Asste/Video/BANNER (7).mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <h1>Buy Design Plans</h1>
+            <p>Premium design plans for your dream home</p>
+            
+        </div>
+    </section>
+
+    <!-- Features Comparison -->
+    <section class="features-comparison">
+        <div class="comparison-container">
+            <div class="comparison-header">
+                <h2>Why Choose Our Services?</h2>
+            </div>
+             <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/1.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/2.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/3.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/4.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/5.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/6.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+           
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/7.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/8.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/9.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/10.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/11.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/12.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/13.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/14.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/14.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/15.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/16.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/17.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/18.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/19.PNG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/20.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/21.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/22.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/23.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/24.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/25.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/26.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/27.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/28.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/29.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/30.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/31.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/32.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/33.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/34.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/35.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/36.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/37.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="project-box" data-category="residential modern">
+                    <div class="project-image">
+                        <img src="./Asste/Image/38.JPG" alt="Modern Villa">
+                        <div class="project-overlay">
+                            <a href="./form first.html" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Barki Design</span>
+                        <h3 class="project-title">Design</h3>
+                        <p class="project-description">Barki Design Studio</p>
+                        <div class="project-meta">
+                            <span class="project-date"></span>
+                            <a href="./form first.html" class="project-link">Buy Now<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            <div class="load-more-container">
+                
+            </div>
+        </div>
+    </section>
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Fast & Efficient</h3>
+                    <p>Create stunning design in minutes with our intuitive</p>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="comparison-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Reliable</h3>
+                    <p>Your projects are safely stored in the cloud with enterprise-grade security</p>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="comparison-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Get help whenever you need it with our dedicated support team</p>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="comparison-icon">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <h3>Regular Updates</h3>
+                    <p>Always have access to the latest features and improvements</p>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="comparison-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Team Collaboration</h3>
+                    <p>Work together seamlessly with your team in real-time</p>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="comparison-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Ready</h3>
+                    <p>Design on the go with our fully-featured mobile applications</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="testimonials-header">
+                <h2>What Our Customers Say</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"    
+"Excellent service and professional behavior. The team delivered quality work on time. Fully satisfied.""</p>
+                    <div class="testimonial-author">
+                        <img src="./Asste/Image/feedback icon.jpg" alt="Customer" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Homeowner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">""Very reliable service provider. Communication was clear and work quality was outstanding."
+
+"</p>
+                    <div class="testimonial-author">
+                        <img src="./Asste/Image/feedback icon.jpg" alt="Customer" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Interior Designer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">""Great experience from start to finish. Smooth process and excellent results."
+
+"</p>
+                    <div class="testimonial-author">
+                        <img src="./Asste/Image/feedback icon.jpg" alt="Customer" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <p>Architecture Firm CEO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Build Your Dream Home With Us
+?</h2>
+            <p>Build your dream home with us Modern designs • Quality materials • Trusted construction Because your home deserves the best.
+
+</p>
+            <a href="./Services.html" class="cta-button-white">Buy Now</a>
+        </div>
+    </section>
+
+      <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BARKI DESIGN STUDIO</h3>
+                <p>Build your dream home with us Modern designs • Quality materials • Trusted construction Because your home deserves the best.
+
+</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="./index.html">Home</a></p>
+                <p><a href="./About.html">About Us</a></p>
+                <p><a href="./Services.html">Services</a></p>
+                <p><a href="./Portfolio.html">Portfolio</a></p>
+                <p><a href="./Buy Plan.html">Buy Plan</a></p>
+                <p><a href="./Contact.html">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+               <p><a href="#">Architecture design </a></p>
+                <p><a href="#">Site plan design </a></p>
+                <p><a href="#">MEP design </a></p>
+                <p><a href="#">Structure design </a></p>
+                <p><a href="#">Civil design </a></p>
+                <p><a href="#">3d rendering</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i>5900 Balcones drive 11610, Austin, TX, United States, 78731</p>
+                <p><i class="fas fa-phone"></i>+1 (672) 572-3673</p>
+                <p><i class="fas fa-envelope"></i> info@Barkidesignstudio.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sun: 8AM-5PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Barki Design Studio All rights reserved | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-box" id="chatbotBox">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> BARKI Assistant</h3>
+                <div class="chatbot-status">
+                    <div class="status-dot"></div>
+                    <span>Online</span>
+                </div>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    Hello! I'm the BARKI Assistant. How can I help you today?
+                    <div class="message-time">Just now</div>
+                </div>
+                <div class="message bot">
+                    You can ask me about our design plans, pricing, or the purchasing process.
+                    <div class="message-time">Just now</div>
+                    <div class="chatbot-quick-replies">
+                        <div class="quick-reply">Tell me about your design plans</div>
+                        <div class="quick-reply">How does the purchase process work?</div>
+                        <div class="quick-reply">What's the pricing for plans?</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
+                <button class="chatbot-send" id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 5%';
+                header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.padding = '15px 5%';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Video play function
+        function playVideo() {
+            // Create modal for video
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const videoContainer = document.createElement('div');
+            videoContainer.style.cssText = `
+                position: relative;
+                width: 80%;
+                max-width: 900px;
+                aspect-ratio: 16/9;
+            `;
+            
+            const video = document.createElement('video');
+            video.style.cssText = `
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+            `;
+            video.controls = true;
+            video.autoplay = true;
+            
+            // Add a sample video source (replace with actual video)
+            video.innerHTML = `
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            `;
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            closeBtn.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 30px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            `;
+            closeBtn.onmouseover = () => closeBtn.style.transform = 'scale(1.2)';
+            closeBtn.onmouseout = () => closeBtn.style.transform = 'scale(1)';
+            closeBtn.onclick = () => document.body.removeChild(modal);
+            
+            videoContainer.appendChild(video);
+            videoContainer.appendChild(closeBtn);
+            modal.appendChild(videoContainer);
+            document.body.appendChild(modal);
+            
+            // Close modal when clicking outside
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            };
+        }
+
+        // Buy Now function
+        function buyNow(planName) {
+            // Create success modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                text-align: center;
+                max-width: 500px;
+                animation: slideUp 0.3s ease;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #ef955a, #f77737); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-check" style="color: white; font-size: 40px;"></i>
+                </div>
+                <h2 style="color: #333; margin-bottom: 15px;">Purchase Successful!</h2>
+                <p style="color: #666; margin-bottom: 30px;">You have successfully purchased the <strong>${planName}</strong>. Check your email for confirmation and next steps.</p>
+                <button onclick="this.closest('div').parentElement.remove()" style="background: linear-gradient(135deg, #ef955a, #f77737); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif;">
+                    Got it!
+                </button>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Close modal when clicking outside
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            };
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Apply observer to service boxes
+        document.querySelectorAll('.service-box').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+            observer.observe(el);
+        });
+
+        // Apply observer to comparison cards
+        document.querySelectorAll('.comparison-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Apply observer to testimonial cards
+        document.querySelectorAll('.testimonial-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Apply observer to project boxes
+        document.querySelectorAll('.project-box').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.05}s, transform 0.6s ease ${index * 0.05}s`;
+            observer.observe(el);
+        });
+
+        // Add CSS animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    transform: translateY(50px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotBox = document.getElementById('chatbotBox');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+
+        // Toggle chatbot
+        chatbotToggle.addEventListener('click', function() {
+            chatbotBox.classList.toggle('active');
+            if (chatbotBox.classList.contains('active')) {
+                chatbotToggle.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                chatbotToggle.innerHTML = '<i class="fas fa-comments"></i>';
+            }
+        });
+
+        // Close chatbot
+        chatbotClose.addEventListener('click', function() {
+            chatbotBox.classList.remove('active');
+            chatbotToggle.innerHTML = '<i class="fas fa-comments"></i>';
+        });
+
+        // Function to get current time
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // Function to add message to chat
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            
+            const messageText = document.createElement('div');
+            messageText.textContent = message;
+            messageDiv.appendChild(messageText);
+            
+            const messageTime = document.createElement('div');
+            messageTime.className = 'message-time';
+            messageTime.textContent = getCurrentTime();
+            messageDiv.appendChild(messageTime);
+            
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        // Function to show typing indicator
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            
+            for (let i = 0; i < 3; i++) {
+                const span = document.createElement('span');
+                typingDiv.appendChild(span);
+            }
+            
+            chatbotMessages.appendChild(typingDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            return typingDiv;
+        }
+
+        // Function to remove typing indicator
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Function to generate bot response
+        function generateBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Simple keyword-based responses
+            if (lowerMessage.includes('plan') || lowerMessage.includes('design')) {
+                return "We offer a wide range of design plans including residential, commercial, and custom designs. Each plan includes detailed architectural drawings, 3D renderings, and technical specifications. You can browse our collection and purchase directly from the Buy Plan page.";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('fee')) {
+                return "Our design plans range from $500 to $5000 depending on complexity and customization. Basic residential plans start at $500, while custom commercial designs may be higher. Each plan includes different levels of detail and revisions.";
+            } else if (lowerMessage.includes('purchase') || lowerMessage.includes('buy') || lowerMessage.includes('process')) {
+                return "To purchase a design plan, simply browse our collection, select the plan you like, and click 'Buy Now'. You'll be directed to a form where you can provide your details and payment information. After purchase, you'll receive the complete design files via email.";
+            } else if (lowerMessage.includes('delivery') || lowerMessage.includes('receive') || lowerMessage.includes('file')) {
+                return "After purchase, you'll receive all design files within 24 hours via email. The files include architectural drawings in PDF and DWG format, 3D renderings, material specifications, and any relevant technical documentation.";
+            } else if (lowerMessage.includes('custom') || lowerMessage.includes('modify') || lowerMessage.includes('change')) {
+                return "Yes, we offer customization services for all our design plans. After purchasing a base plan, you can request modifications to suit your specific needs. Additional fees may apply depending on the extent of changes required.";
+            } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email')) {
+                return "You can reach us at:\nPhone: +1 (672) 572-3673\nEmail: info@Barkidesignstudio.com\nAddress: 5900 Balcones drive 11610, Austin, TX, United States, 78731\n\nOur office hours are Monday to Sunday, 8AM-5PM.";
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return "Hello! Thank you for visiting our Buy Plan page. How can I help you find the perfect design plan for your project?";
+            } else {
+                return "Thank you for your question. For more specific information about our design plans, I recommend browsing our collection or scheduling a consultation with one of our design experts. Is there anything else I can help you with?";
+            }
+        }
+
+        // Function to add quick replies to a bot message
+        function addQuickReplies(messageDiv, replies) {
+            const quickRepliesDiv = document.createElement('div');
+            quickRepliesDiv.className = 'chatbot-quick-replies';
+            
+            replies.forEach(reply => {
+                const quickReply = document.createElement('div');
+                quickReply.className = 'quick-reply';
+                quickReply.textContent = reply;
+                quickReply.addEventListener('click', function() {
+                    chatbotInput.value = reply;
+                    sendMessage();
+                });
+                quickRepliesDiv.appendChild(quickReply);
+            });
+            
+            messageDiv.appendChild(quickRepliesDiv);
+        }
+
+        // Function to send message
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message
+            addMessage(message, true);
+            
+            // Clear input
+            chatbotInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = showTypingIndicator();
+            
+            // Generate and show bot response after a delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = generateBotResponse(message);
+                const botMessageDiv = addMessage(response);
+                
+                // Add relevant quick replies based on the response
+                if (message.toLowerCase().includes('plan') || message.toLowerCase().includes('design')) {
+                    addQuickReplies(botMessageDiv, [
+                        'How much do plans cost?',
+                        'What\'s included in a plan?',
+                        'How do I purchase a plan?'
+                    ]);
+                } else if (message.toLowerCase().includes('price') || message.toLowerCase().includes('cost')) {
+                    addQuickReplies(botMessageDiv, [
+                        'Tell me about design plans',
+                        'Can I customize a plan?',
+                        'How do I purchase?'
+                    ]);
+                } else if (message.toLowerCase().includes('purchase') || message.toLowerCase().includes('buy')) {
+                    addQuickReplies(botMessageDiv, [
+                        'How will I receive the files?',
+                        'Can I make changes after purchase?',
+                        'What payment methods do you accept?'
+                    ]);
+                } else if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
+                    addQuickReplies(botMessageDiv, [
+                        'Tell me about your design plans',
+                        'How does the purchase process work?',
+                        'What\'s the pricing for plans?'
+                    ]);
+                }
+            }, 1500);
+        }
+
+        // Send message on button click
+        chatbotSend.addEventListener('click', sendMessage);
+
+        // Send message on Enter key
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Add click event to existing quick replies
+        document.querySelectorAll('.quick-reply').forEach(reply => {
+            reply.addEventListener('click', function() {
+                chatbotInput.value = this.textContent;
+                sendMessage();
+            });
+        });
+    </script>
+</body>
+</html>

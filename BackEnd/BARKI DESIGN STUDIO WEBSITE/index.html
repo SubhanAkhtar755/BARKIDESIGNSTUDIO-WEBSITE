@@ -1,0 +1,3212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" href="./Asste/Image/main header image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Popup Modal */
+        .popup-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .popup-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .popup-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .popup-form {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ef955a;
+            box-shadow: 0 0 0 3px rgba(239, 149, 90, 0.1);
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .popup-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .popup-submit {
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+        }
+
+        .popup-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .popup-close {
+            background: #f8f9fa;
+            color: #666;
+        }
+
+        .popup-close:hover {
+            background: #e9ecef;
+        }
+
+        .popup-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .popup-close-btn:hover {
+            color: #333;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ef955a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ef955a;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ef955a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #ef955a;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: #ef955a;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #333;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text h1 span {
+            color: #ef955a;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #666;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        .primary-btn {
+            background-color: #ef955a;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.4);
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: #ef955a;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #ef955a;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .secondary-btn:hover {
+            background-color: #ef955a;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* 3D House Animation */
+        .hero-3d {
+            position: relative;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .house-3d {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate3d 20s infinite linear;
+        }
+
+        .house-face {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            opacity: 0.9;
+        }
+
+        .house-face:nth-child(1) {
+            transform: translateZ(200px);
+        }
+
+        .house-face:nth-child(2) {
+            transform: rotateY(90deg) translateZ(200px);
+        }
+
+        .house-face:nth-child(3) {
+            transform: rotateY(180deg) translateZ(200px);
+        }
+
+        .house-face:nth-child(4) {
+            transform: rotateY(-90deg) translateZ(200px);
+        }
+
+        .house-face:nth-child(5) {
+            transform: rotateX(90deg) translateZ(200px);
+        }
+
+        .house-face:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(200px);
+        }
+
+        @keyframes rotate3d {
+            0% {
+                transform: rotateX(0) rotateY(0);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 60px 5%;
+            background-color: #f8f8f8;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: #ef955a;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #ef955a, #f77737);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card ul li {
+            color: #666;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .feature-card ul li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #ef955a;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 5%;
+            background-color: #f8f8f8;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: #ef955a;
+            color: white;
+            padding: 5px 40px;
+            font-size: 12px;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            text-align: center;
+        }
+
+        .pricing-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .pricing-price {
+            font-size: 40px;
+            font-weight: 700;
+            color: #ef955a;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price span {
+            font-size: 18px;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .pricing-body {
+            padding: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features i {
+            color: #ef955a;
+            margin-right: 10px;
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-button:hover {
+            background-color: #e67e3a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Buy Now Marquee */
+        .buy-now-marquee {
+            background-color: #ef955a;
+            color: white;
+            padding: 15px 0;
+            margin-top: 50px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .buy-now-marquee-content {
+            display: flex;
+            animation: marquee 60s linear infinite; /* Changed from 30s to 60s to slow down */
+            white-space: nowrap;
+        }
+
+        .buy-now-marquee-content span {
+            margin: 0 20px;
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .buy-now-marquee-content i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #ef955a;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 30px 25px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button-white {
+            background-color: white;
+            color: #ef955a;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Partners Section */
+        .partners {
+            padding: 60px 5%;
+            background-color: #f8f8f8;
+            overflow: hidden;
+        }
+
+        .marquee-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 60s linear infinite; /* Changed from 30s to 60s to slow down */
+        }
+
+        .marquee-item {
+            flex: 0 0 auto;
+            margin: 0 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            width: 150px;
+        }
+
+        .marquee-item img {
+            max-width: 100%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .services-marquee {
+            margin-top: 50px;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .services-marquee-inner {
+            display: flex;
+            animation: marquee 50s linear infinite; /* Changed from 25s to 50s to slow down */
+        }
+
+        .service-card {
+            flex: 0 0 auto;
+            margin: 0 20px;
+            width: 300px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ef955a, #f77737);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 50px;
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+        }
+
+        .process-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .step-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: #ef955a;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-icon {
+            font-size: 40px;
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .step-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 3D Gallery */
+        .gallery {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .gallery-marquee {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            cursor: grab;
+        }
+
+        .gallery-marquee.dragging {
+            cursor: grabbing;
+        }
+
+        .gallery-marquee-inner {
+            display: flex;
+            animation: marquee 50s linear infinite; /* Changed from 25s to 50s to slow down */
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .gallery-marquee-inner.paused {
+            animation-play-state: paused !important;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 350px;
+            height: 250px;
+            margin: 0 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            user-select: none;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 5%;
+            background-color: #f8f8f8;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 60px;
+            color: #ef955a;
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            margin-bottom: 20px;
+            color: #666;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        /* News Section */
+        .news {
+            padding: 80px 5%;
+            background-color: white;
+        }
+
+        .news-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-date {
+            color: #ef955a;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .news-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: #ef955a;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #ef955a;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ef955a;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #ef955a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Enhanced Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(239, 149, 90, 0.4);
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(239, 149, 90, 0.5);
+        }
+
+        .chatbot-toggle i {
+            font-size: 24px;
+        }
+
+        .chatbot-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-box.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .chatbot-header {
+            background-color: #ef955a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.bot {
+            background-color: #f1f1f1;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background-color: #ef955a;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chatbot-input-container {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 10px 15px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chatbot-input:focus {
+            border-color: #ef955a;
+        }
+
+        .chatbot-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ef955a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-send:hover {
+            background-color: #e0854a;
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            max-width: 80px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background-color: #999;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .chatbot-quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-reply {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-reply:hover {
+            background-color: #ef955a;
+            color: white;
+            border-color: #ef955a;
+        }
+
+        /* Premium Services Section */
+        .premium-services-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+        }
+
+        .premium-services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-header h2 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .services-header p {
+            font-size: 20px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .premium-marquee-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+            cursor: grab;
+        }
+
+        .premium-marquee-container.dragging {
+            cursor: grabbing;
+        }
+
+        .premium-services-marquee {
+            display: flex;
+            transition: transform 0.3s ease;
+            will-change: transform;
+            animation: marquee 50s linear infinite; /* Changed from 25s to 50s to slow down */
+        }
+
+        .premium-services-marquee.paused {
+            animation-play-state: paused !important;
+        }
+
+        .premium-service-box {
+            flex: 0 0 auto;
+            width: 350px;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin: 0 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .premium-service-box:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .premium-service-box:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ef955a;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(239, 149, 90, 0.3);
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.3);
+        }
+
+        .service-icon i {
+            font-size: 28px;
+            color: white;
+        }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .service-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .service-price {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .price-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ef955a;
+        }
+
+        .price-period {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .buy-now-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 25px rgba(239, 149, 90, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-now-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .buy-now-btn:hover::before {
+            left: 100%;
+        }
+
+        .buy-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(239, 149, 90, 0.4);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 80px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .hero-3d {
+                height: 300px;
+            }
+
+            .house-3d {
+                width: 250px;
+                height: 250px;
+            }
+
+            .house-face {
+                width: 250px;
+                height: 250px;
+            }
+
+            .house-face:nth-child(1) {
+                transform: translateZ(125px);
+            }
+
+            .house-face:nth-child(2) {
+                transform: rotateY(90deg) translateZ(125px);
+            }
+
+            .house-face:nth-child(3) {
+                transform: rotateY(180deg) translateZ(125px);
+            }
+
+            .house-face:nth-child(4) {
+                transform: rotateY(-90deg) translateZ(125px);
+            }
+
+            .house-face:nth-child(5) {
+                transform: rotateX(90deg) translateZ(125px);
+            }
+
+            .house-face:nth-child(6) {
+                transform: rotateX(-90deg) translateZ(125px);
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .chatbot-box {
+                width: calc(100vw - 40px);
+                right: -10px;
+                height: 450px;
+            }
+
+            .service-card {
+                width: 250px;
+            }
+
+            .premium-service-box {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./Asste/Image/BARKI_LOGO__2_-removebg-preview.png" alt="Logo" style="height: 50px;" width="80px">
+            </div>
+            <ul class="nav-links">
+                <li><a href="./index.html" class="active">Home</a></li>
+                <li><a href="./About.html">About</a></li>
+                <li><a href="./Portfolio.html">Portfolio</a></li>
+                <li><a href="./Buy Plan.html">Buy Plan</a></li>
+                <li><a href="./Services.html">Services</a></li>
+                <li><a href="./Social Media.html">Social Media</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Build Your <span>Dream Home</span> With Us</h1>
+                <p>Build your dream home with us 🏡
+Modern designs • Quality materials • Trusted construction
+Because your home deserves the best.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="primary-btn">Build Dream</a>
+                    <a href="#premium-services" class="secondary-btn">Buy Now</a>
+                </div>
+            </div>
+            <video 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                width="100%" 
+                height="auto"
+            >
+                <source src="./Asste/Video/BANNER (1) .mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">HOURS OF WORK</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">579+</div>
+                <div class="stat-label">FINISHED WORKS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">CLIENTS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Customer Support</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners">
+        <h2 class="section-title">Trusted Companies</h2>
+        <div class="marquee-container">
+            <div class="marquee">
+                <div class="marquee-item">
+                    <img src="./Asste/Image/9 (2).png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/10 (2).png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/11.png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/12.png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/13.png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/9 (2).png" alt="Partner">
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-item">
+                    <img src="./Asste/Image/10 (2).png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/11.png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/13.png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/logo 11 .png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/13.png" alt="Partner">
+                </div>
+                <div class="marquee-item">
+                    <img src="./Asste/Image/10 (2).png" alt="Partner">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Services Section -->
+    <section class="premium-services-section" id="premium-services">
+        <div class="premium-services-container">
+            <div class="services-header">
+                <h2>Our Premium Services</h2>
+                <p>Discover our range of build your dream home with us</p>
+                <p style="margin-top: 10px; font-size: 16px; color: #ef955a;">
+                    <i class="fas fa-hand-pointer"></i> You can drag the service boxes to move them manually
+                </p>
+            </div>
+            <div class="premium-marquee-container" id="premiumMarqueeContainer">
+                <div class="premium-services-marquee" id="premiumServicesMarquee">
+                    <!-- Service Box 1 -->
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/Architecture designjpeg.jpeg" alt="3D Modeling Service">
+                            <div class="service-badge">Architecture desigm</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">Architectural Design</h3>
+                            <p class="service-description"> Custom design solutions for residential and commercial projects, tailored to your needs and budget.</p>
+                            <br><br><br>
+                           <a href="./Services.html"><button class="buy-now-btn" onclick="buyService('3D Modeling')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+
+                    <!-- Service Box 2 -->
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/Site Plan Design .jpeg" alt="Interior Design Service">
+                            <div class="service-badge">Site Plan Design</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">Site Plan Design</h3>
+                            <p class="service-description">Expert site planning to ensure your project meets local regulations and maximizes space.</p>
+                            <br><br><br>
+                           <a href="./Services.html"><button class="buy-now-btn" onclick="buyService('Interior Design')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+
+                    <!-- Service Box 3 -->
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/MEP design.jpeg" alt="VR Tour Service">
+                            <div class="service-badge">MEP Design</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                              <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">MEP Design</h3>
+                            <p class="service-description">Mechanical, Electrical, and Plumbing design services to get your project running smoothly.</p>
+                            <br><br><br>
+                           <a href="./Services.html"> <button class="buy-now-btn" onclick="buyService('VR Tour')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+
+                    <!-- Service Box 4 -->
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/Structure designjpeg.jpeg">
+                            <div class="service-badge">Structural Design</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                               <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">Structural Design</h3>
+                            <p class="service-description">Robust structural design solutions to ensure your project's stability and safety.</p>
+                            <br><br><br><br>
+                        <a href="./Services.html">   <button class="buy-now-btn" onclick="buyService('Expert Consultation')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+
+                    <!-- Service Box 5 -->
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/Civil design.jpeg" alt="3D Visualization Service">
+                            <div class="service-badge">Civil Design</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                               <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">Civil Design</h3>
+                            <p class="service-description">Comprehensive civil design services to ensure your project is built on solid ground.</p>
+                            <br><br><br>
+                      <a href="./Services.html">     <button class="buy-now-btn" onclick="buyService('3D Visualization')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+
+                    <!-- Service Box 6 -->
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/3d rendering 1.jpeg" alt="Custom Package Service">
+                            <div class="service-badge">3D Rendering</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">3D Rendering</h3>
+                            <p class="service-description">Stunning 3D visualizations to help you visualize your project before it's built.</p>
+                            <div class="service-price">
+                                <span class="price-amount">Custom</span>
+                                <span class="price-period">pricing</span>
+                            </div>
+                        <a href="./Services.html">  <button class="buy-now-btn" onclick="buyService('Custom Package')">
+                                Get Quote <i class="fas fa-arrow-right"></i>
+                            </button></a>  
+                        </div>
+                    </div>
+
+                    <!-- Duplicate for seamless loop -->
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/Architecture designjpeg.jpeg" alt="3D Modeling Service">
+                            <div class="service-badge">Architecture desigm</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">Architectural Design</h3>
+                            <p class="service-description"> Custom design solutions for residential and commercial projects, tailored to your needs and budget.</p>
+                            <br><br><br>
+                           <a href="./Services.html"><button class="buy-now-btn" onclick="buyService('3D Modeling')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/Site Plan Design .jpeg" alt="Interior Design Service">
+                            <div class="service-badge">Site Plan Design</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">Site Plan Design</h3>
+                            <p class="service-description">Expert site planning to ensure your project meets local regulations and maximizes space.</p>
+                            <br><br><br>
+                           <a href="./Services.html"><button class="buy-now-btn" onclick="buyService('Interior Design')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+
+                    <div class="premium-service-box">
+                        <div class="service-image">
+                            <img src="./Asste/Image/MEP design.jpeg" alt="VR Tour Service">
+                            <div class="service-badge">MEP Design</div>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                              <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="service-title">MEP Design</h3>
+                            <p class="service-description">Mechanical, Electrical, and Plumbing design services to get your project running smoothly.</p>
+                            <br><br><br>
+                           <a href="./Services.html"> <button class="buy-now-btn" onclick="buyService('VR Tour')">
+                                Buy Now <i class="fas fa-arrow-right"></i>
+                            </button></a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="services">
+        <h2 class="section-title">How It Works</h2>
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+               <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3> Concept Development</h3>
+                <p>Concept Development
+We start with a discussion to understand your needs and vision. Our team creates initial sketches to explore different ideas and possibilities.
+</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                <i class="fas fa-wrench"></i>
+                </div>
+                <h3>Design Development</h3>
+                <p>
+Our team prepares detailed floor plans and elevations, refining the design to meet your requirements.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+             <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3> Visualization</h3>
+                <p>
+We bring your project to life with stunning 3D renderings, helping you visualize the final result.
+</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-icon">
+                <i class="fas fa-file"></i>
+                </div>
+                <h3>Technical Documentation</h3>
+                <p>
+Our experts prepare comprehensive MEP and structural designs, ensuring your project is ready for construction.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Gallery -->
+    <section class="gallery" id="portfolio">
+        <h2 class="section-title">Our Portfolio</h2>
+        <p style="text-align: center; margin-top: -30px; margin-bottom: 20px; color: #ef955a;">
+            <i class="fas fa-hand-pointer"></i> You can drag the gallery items to move them manually
+        </p>
+        <div class="gallery-marquee" id="galleryMarqueeContainer">
+            <div class="gallery-marquee-inner" id="galleryMarqueeInner">
+                <div class="gallery-item">
+                    <img src="./Asste/Image/1.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                                            </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/3.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/4.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/5.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                        
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/6.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                      
+                    </div>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="gallery-item">
+                    <img src="./Asste/Image/7.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                   
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/8.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                    
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/9.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                      
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/10.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+                      
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./Asste/Image/11.JPG" alt="3D Home">
+                    <div class="gallery-overlay">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            <!-- Buy Now Marquee -->
+            <div class="buy-now-marquee">
+                <div class="buy-now-marquee-content">
+                    <span><i class="fas fa-shopping-cart"></i> Buy Now & Save 20% - Limited Time Offer!</span>
+                    <span><i class="fas fa-gift"></i> Special Discount on All Plans Today</span>
+                    <span><i class="fas fa-star"></i> Join 10,000+ Happy Customers</span>
+                    <span><i class="fas fa-rocket"></i> Start Your 3D Design Journey Now</span>
+                    <span><i class="fas fa-shopping-cart"></i> Buy Now & Save 20% - Limited Time Offer!</span>
+                    <span><i class="fas fa-gift"></i> Special Discount on All Plans Today</span>
+                    <span><i class="fas fa-star"></i> Join 10,000+ Happy Customers</span>
+                    <span><i class="fas fa-rocket"></i> Start Your 3D Design Journey Now</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news">
+        <h2 class="section-title">Latest News & Updates</h2>
+        <div class="news-grid">
+            <article class="news-card">
+                <div class="news-image">
+                   
+                      <video 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                width="100%" 
+                height="auto"
+            >
+                <source src="./Asste/Video/BANNER (1) .mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+                </div>
+                <div class="news-content">
+                    <div class="news-date"></div>
+                    <h3 class="news-title">Build Your Dream Home With Us
+</h3>
+                    <p class="news-excerpt">Build your dream home with us 🏡 Modern designs • Quality materials • Trusted construction Because your home deserves the best.</p>
+                    <a href="#" class="read-more"></a>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="news-image">
+         <video 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                width="100%" 
+                height="auto"
+            >
+                <source src="./Asste/Video/BANNER (2).mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+                </div>
+                <div class="news-content">
+                    <div class="news-date"></div>
+                    <h3 class="news-title">Build Your Dream Home With Us
+</h3>
+                    <p class="news-excerpt">Build your dream home with us 🏡 Modern designs • Quality materials • Trusted construction Because your home deserves the best.</p>
+                    <a href="#" class="read-more"></a>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="news-image">
+                     <video 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                width="100%" 
+                height="auto"
+            >
+                <source src="./Asste/Video/BANNER (6) .mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+                </div>
+                <div class="news-content">
+                    <div class="news-date"></div>
+                    <h3 class="news-title">Build Your Dream Home With Us
+</h3>
+                    <p class="news-excerpt">Build your dream home with us 🏡 Modern designs • Quality materials • Trusted construction Because your home deserves the best.</p>
+                    <a href="#" class="read-more"></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">Client Feedback</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Excellent service and professional behavior. The team delivered quality work on time. Fully satisfied."</p>
+                <div class="testimonial-author">
+                    <img src="./Asste/Image/feedback icon.jpg" alt="Client" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Interior Designer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Very reliable service provider. Communication was clear and work quality was outstanding."</p>
+                <div class="testimonial-author">
+                    <img src="./Asste/Image/feedback icon.jpg" alt="Client" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Real Estate Developer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Great experience from start to finish. Smooth process and excellent results."</p>
+                <div class="testimonial-author">
+                    <img src="./Asste/Image/feedback icon.jpg" alt="Client" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Emily Rodriguez</h4>
+                        <p>Architect</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Build Your Dream Home With Us
+?</h2>
+            <p>Build your dream home with us Modern designs • Quality materials • Trusted construction Because your home deserves the best.
+
+</p>
+            <a href="./Services.html" class="cta-button-white">Buy Now</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="faq-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                  MEP Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>
+Mechanical, Electrical, and Plumbing design services to get your project running smoothly.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Architectural Design Services 
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Custom design solutions for residential and commercial projects, tailored to your needs and budget.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                   Site Plan Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p> Expert site planning to ensure your project meets local regulations and maximizes space.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                   Structural Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p> Robust structural design solutions to ensure your project's stability and safety.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Civil Design Services
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p> Comprehensive civil design services to ensure your project is built on solid ground..</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BARKI DESIGN STUDIO</h3>
+                <p>Build your dream home with us Modern designs • Quality materials • Trusted construction Because your home deserves the best.
+
+</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="./index.html">Home</a></p>
+                <p><a href="./About.html">About Us</a></p>
+                <p><a href="./Services.html">Services</a></p>
+                <p><a href="./Portfolio.html">Portfolio</a></p>
+                <p><a href="./Buy Plan.html">Buy Plan</a></p>
+                <p><a href="./Contact.html">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p><a href="#">Architecture design </a></p>
+                <p><a href="#">Site plan design </a></p>
+                <p><a href="#">MEP design </a></p>
+                <p><a href="#">Structure design </a></p>
+                <p><a href="#">Civil design </a></p>
+                <p><a href="#">3d rendering</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i>5900 Balcones drive 11610, Austin, TX, United States, 78731</p>
+                <p><i class="fas fa-phone"></i>+1 (672) 572-3673</p>
+                <p><i class="fas fa-envelope"></i> info@Barkidesignstudio.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sun: 8AM-5PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Barki Design Studio All rights reserved | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Enhanced AI Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-box" id="chatbotBox">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> BARKI Assistant</h3>
+                <div class="chatbot-status">
+                    <div class="status-dot"></div>
+                    <span>Online</span>
+                </div>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    Hello! I'm the BARKI Assistant. How can I help you today?
+                    <div class="message-time">Just now</div>
+                </div>
+                <div class="message bot">
+                    You can ask me about our design services, pricing, or the design process.
+                    <div class="message-time">Just now</div>
+                    <div class="chatbot-quick-replies">
+                        <div class="quick-reply">Tell me about your services</div>
+                        <div class="quick-reply">How does the design process work?</div>
+                        <div class="quick-reply">What are your prices?</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
+                <button class="chatbot-send" id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <script>
+        // Buy Service function
+        function buyService(serviceName) {
+            // Create success modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                text-align: center;
+                max-width: 500px;
+                animation: slideUp 0.3s ease;
+            `;
+            
+            const buttonText = serviceName === 'Custom Package' ? 'Request Sent!' : 'Order Placed!';
+            
+            modalContent.innerHTML = `
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #ef955a, #f77737); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-check" style="color: white; font-size: 40px;"></i>
+                </div>
+                <h2 style="color: #333; margin-bottom: 15px;">${buttonText}</h2>
+                <p style="color: #666; margin-bottom: 30px;">Your request for <strong>${serviceName}</strong> has been received. Our team will contact you within 24 hours.</p>
+                <button onclick="this.closest('div').parentElement.remove()" style="background: linear-gradient(135deg, #ef955a, #f77737); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif;">
+                    Got it!
+                </button>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Close modal when clicking outside
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            };
+        }
+
+        // Premium Services Marquee with Drag Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const marqueeContainer = document.getElementById('premiumMarqueeContainer');
+            const marquee = document.getElementById('premiumServicesMarquee');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            let animationId;
+            let isPaused = false;
+            let scrollSpeed = 0.5; // Reduced from 1 to 0.5 to slow down
+            
+            // Auto-scroll function
+            function autoScroll() {
+                if (!isPaused) {
+                    marqueeContainer.scrollLeft += scrollSpeed;
+                    
+                    // Reset to start when reaching the end
+                    if (marqueeContainer.scrollLeft >= marquee.scrollWidth / 2) {
+                        marqueeContainer.scrollLeft = 0;
+                    }
+                }
+                animationId = requestAnimationFrame(autoScroll);
+            }
+            
+            // Start auto-scroll
+            autoScroll();
+            
+            // Mouse events
+            marqueeContainer.addEventListener('mousedown', (e) => {
+                isDown = true;
+                marqueeContainer.classList.add('dragging');
+                startX = e.pageX - marqueeContainer.offsetLeft;
+                scrollLeft = marqueeContainer.scrollLeft;
+                isPaused = true;
+                cancelAnimationFrame(animationId);
+            });
+            
+            marqueeContainer.addEventListener('mouseleave', () => {
+                isDown = false;
+                marqueeContainer.classList.remove('dragging');
+                isPaused = false;
+                animationId = requestAnimationFrame(autoScroll);
+            });
+            
+            marqueeContainer.addEventListener('mouseup', () => {
+                isDown = false;
+                marqueeContainer.classList.remove('dragging');
+                isPaused = false;
+                animationId = requestAnimationFrame(autoScroll);
+            });
+            
+            marqueeContainer.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - marqueeContainer.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fast
+                marqueeContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Touch events for mobile
+            marqueeContainer.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - marqueeContainer.offsetLeft;
+                scrollLeft = marqueeContainer.scrollLeft;
+                isPaused = true;
+                cancelAnimationFrame(animationId);
+            });
+            
+            marqueeContainer.addEventListener('touchend', () => {
+                isDown = false;
+                isPaused = false;
+                animationId = requestAnimationFrame(autoScroll);
+            });
+            
+            marqueeContainer.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                const x = e.touches[0].pageX - marqueeContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                marqueeContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Pause on hover
+            marqueeContainer.addEventListener('mouseenter', () => {
+                if (!isDown) {
+                    isPaused = true;
+                }
+            });
+            
+            marqueeContainer.addEventListener('mouseleave', () => {
+                if (!isDown) {
+                    isPaused = false;
+                }
+            });
+        });
+
+        // Gallery Marquee with Drag Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryContainer = document.getElementById('galleryMarqueeContainer');
+            const galleryMarquee = document.getElementById('galleryMarqueeInner');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            let animationId;
+            let isPaused = false;
+            let scrollSpeed = 0.5; // Reduced from 1 to 0.5 to slow down
+            
+            // Auto-scroll function
+            function autoScroll() {
+                if (!isPaused) {
+                    galleryContainer.scrollLeft += scrollSpeed;
+                    
+                    // Reset to start when reaching the end
+                    if (galleryContainer.scrollLeft >= galleryMarquee.scrollWidth / 2) {
+                        galleryContainer.scrollLeft = 0;
+                    }
+                }
+                animationId = requestAnimationFrame(autoScroll);
+            }
+            
+            // Start auto-scroll
+            autoScroll();
+            
+            // Mouse events
+            galleryContainer.addEventListener('mousedown', (e) => {
+                isDown = true;
+                galleryContainer.classList.add('dragging');
+                startX = e.pageX - galleryContainer.offsetLeft;
+                scrollLeft = galleryContainer.scrollLeft;
+                isPaused = true;
+                cancelAnimationFrame(animationId);
+            });
+            
+            galleryContainer.addEventListener('mouseleave', () => {
+                isDown = false;
+                galleryContainer.classList.remove('dragging');
+                isPaused = false;
+                animationId = requestAnimationFrame(autoScroll);
+            });
+            
+            galleryContainer.addEventListener('mouseup', () => {
+                isDown = false;
+                galleryContainer.classList.remove('dragging');
+                isPaused = false;
+                animationId = requestAnimationFrame(autoScroll);
+            });
+            
+            galleryContainer.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - galleryContainer.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fast
+                galleryContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Touch events for mobile
+            galleryContainer.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - galleryContainer.offsetLeft;
+                scrollLeft = galleryContainer.scrollLeft;
+                isPaused = true;
+                cancelAnimationFrame(animationId);
+            });
+            
+            galleryContainer.addEventListener('touchend', () => {
+                isDown = false;
+                isPaused = false;
+                animationId = requestAnimationFrame(autoScroll);
+            });
+            
+            galleryContainer.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                const x = e.touches[0].pageX - galleryContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                galleryContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Pause on hover
+            galleryContainer.addEventListener('mouseenter', () => {
+                if (!isDown) {
+                    isPaused = true;
+                }
+            });
+            
+            galleryContainer.addEventListener('mouseleave', () => {
+                if (!isDown) {
+                    isPaused = false;
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 5%';
+                header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.padding = '15px 5%';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroText = document.querySelector('.hero-text');
+            if (heroText) {
+                heroText.style.transform = `translateY(${scrolled * 0.3}px)`;
+                heroText.style.opacity = 1 - scrolled / 600;
+            }
+        });
+
+        // Add hover effect to gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.querySelector('img').style.transform = 'scale(1.1)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.querySelector('img').style.transform = 'scale(1)';
+            });
+        });
+
+        // Pause marquee on hover
+        document.querySelectorAll('.marquee, .services-marquee-inner').forEach(marquee => {
+            marquee.addEventListener('mouseenter', function() {
+                this.style.animationPlayState = 'paused';
+            });
+            
+            marquee.addEventListener('mouseleave', function() {
+                this.style.animationPlayState = 'running';
+            });
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.ceil(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            
+            updateCounter();
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const text = stat.textContent;
+                        if (text.includes('K+')) {
+                            const num = parseInt(text.replace('K+', '')) * 1000;
+                            animateCounter(stat, num, 2000);
+                            setTimeout(() => {
+                                stat.textContent = text;
+                            }, 2100);
+                        } else if (text.includes('%')) {
+                            const num = parseInt(text.replace('%', ''));
+                            animateCounter(stat, num, 2000);
+                            setTimeout(() => {
+                                stat.textContent = text;
+                            }, 2100);
+                        } else if (text.includes('/')) {
+                            const num = parseInt(text.split('/')[0]);
+                            animateCounter(stat, num, 2000);
+                            setTimeout(() => {
+                                stat.textContent = text;
+                            }, 2100);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Enhanced Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotBox = document.getElementById('chatbotBox');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+
+        // Toggle chatbot
+        chatbotToggle.addEventListener('click', function() {
+            chatbotBox.classList.toggle('active');
+            if (chatbotBox.classList.contains('active')) {
+                chatbotToggle.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                chatbotToggle.innerHTML = '<i class="fas fa-comments"></i>';
+            }
+        });
+
+        // Close chatbot
+        chatbotClose.addEventListener('click', function() {
+            chatbotBox.classList.remove('active');
+            chatbotToggle.innerHTML = '<i class="fas fa-comments"></i>';
+        });
+
+        // Function to get current time
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // Function to add message to chat
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            
+            const messageText = document.createElement('div');
+            messageText.textContent = message;
+            messageDiv.appendChild(messageText);
+            
+            const messageTime = document.createElement('div');
+            messageTime.className = 'message-time';
+            messageTime.textContent = getCurrentTime();
+            messageDiv.appendChild(messageTime);
+            
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        // Function to show typing indicator
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            
+            for (let i = 0; i < 3; i++) {
+                const span = document.createElement('span');
+                typingDiv.appendChild(span);
+            }
+            
+            chatbotMessages.appendChild(typingDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            return typingDiv;
+        }
+
+        // Function to remove typing indicator
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Function to generate bot response
+        function generateBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Simple keyword-based responses
+            if (lowerMessage.includes('service') || lowerMessage.includes('offer')) {
+                return "We offer a comprehensive range of design services including architectural design, structural design, MEP design, civil design, site plan design, and 3D rendering. Our team works with both residential and commercial projects to bring your vision to life.";
+            } else if (lowerMessage.includes('process') || lowerMessage.includes('how') || lowerMessage.includes('work')) {
+                return "Our design process consists of four main steps: 1) Concept Development - We understand your needs and create initial sketches. 2) Design Development - We prepare detailed floor plans and elevations. 3) Visualization - We create 3D renderings to help you visualize the final result. 4) Technical Documentation - We prepare comprehensive MEP and structural designs for construction.";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('fee')) {
+                return "Our pricing varies depending on the scope and complexity of your project. We offer custom pricing for each service based on your specific requirements. Contact us for a personalized quote tailored to your project needs.";
+            } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email') || lowerMessage.includes('address')) {
+                return "You can reach us at:\nPhone: +1 (672) 572-3673\nEmail: info@Barkidesignstudio.com\nAddress: 5900 Balcones drive 11610, Austin, TX, United States, 78731\n\nOur office hours are Monday to Sunday, 8AM-5PM.";
+            } else if (lowerMessage.includes('hour') || lowerMessage.includes('time') || lowerMessage.includes('open')) {
+                return "We're open Monday through Sunday, from 8:00 AM to 5:00 PM. You can also reach us via email at info@Barkidesignstudio.com or through our contact form on the website.";
+            } else if (lowerMessage.includes('project') || lowerMessage.includes('start') || lowerMessage.includes('begin')) {
+                return "To start a project with us, you can contact us via phone, email, or through our contact form. We'll schedule a consultation to discuss your requirements and provide a detailed quote. Our team will guide you through every step of the design process.";
+            } else if (lowerMessage.includes('architecture') || lowerMessage.includes('architectural')) {
+                return "Our architectural design service provides custom design solutions for residential and commercial projects. Our team creates detailed floor plans, elevations, and 3D visualizations tailored to your needs and budget.";
+            } else if (lowerMessage.includes('structural')) {
+                return "Our structural design service ensures your project's stability and safety. We provide robust structural design solutions that comply with all building codes and regulations.";
+            } else if (lowerMessage.includes('mep')) {
+                return "Our MEP (Mechanical, Electrical, and Plumbing) design service covers all technical aspects of your building systems. We ensure your project runs smoothly with properly designed mechanical, electrical, and plumbing systems.";
+            } else if (lowerMessage.includes('civil')) {
+                return "Our civil design service ensures your project is built on solid ground. We provide comprehensive civil design services including site grading, drainage, and utility planning.";
+            } else if (lowerMessage.includes('site plan')) {
+                return "Our site plan design service ensures your project meets local regulations and maximizes space. We create detailed site plans that include landscaping, parking, and circulation patterns.";
+            } else if (lowerMessage.includes('3d') || lowerMessage.includes('rendering')) {
+                return "Our 3D rendering service creates stunning visualizations to help you see your project before it's built. We provide realistic 3D renderings that showcase materials, lighting, and spatial relationships.";
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return "Hello! Thank you for reaching out to Barki Design Studio. How can I assist you with your design needs today?";
+            } else {
+                return "Thank you for your question. For more specific information about your project, I recommend scheduling a consultation with one of our design experts. Is there anything else I can help you with?";
+            }
+        }
+
+        // Function to add quick replies to a bot message
+        function addQuickReplies(messageDiv, replies) {
+            const quickRepliesDiv = document.createElement('div');
+            quickRepliesDiv.className = 'chatbot-quick-replies';
+            
+            replies.forEach(reply => {
+                const quickReply = document.createElement('div');
+                quickReply.className = 'quick-reply';
+                quickReply.textContent = reply;
+                quickReply.addEventListener('click', function() {
+                    chatbotInput.value = reply;
+                    sendMessage();
+                });
+                quickRepliesDiv.appendChild(quickReply);
+            });
+            
+            messageDiv.appendChild(quickRepliesDiv);
+        }
+
+        // Function to send message
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message
+            addMessage(message, true);
+            
+            // Clear input
+            chatbotInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = showTypingIndicator();
+            
+            // Generate and show bot response after a delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = generateBotResponse(message);
+                const botMessageDiv = addMessage(response);
+                
+                // Add relevant quick replies based on the response
+                if (message.toLowerCase().includes('service') || message.toLowerCase().includes('offer')) {
+                    addQuickReplies(botMessageDiv, [
+                        'How does the design process work?',
+                        'What are your prices?',
+                        'How can I contact you?'
+                    ]);
+                } else if (message.toLowerCase().includes('process') || message.toLowerCase().includes('how')) {
+                    addQuickReplies(botMessageDiv, [
+                        'Tell me about your services',
+                        'What are your prices?',
+                        'How can I start a project?'
+                    ]);
+                } else if (message.toLowerCase().includes('price') || message.toLowerCase().includes('cost')) {
+                    addQuickReplies(botMessageDiv, [
+                        'Tell me about your services',
+                        'How can I contact you?',
+                        'How can I start a project?'
+                    ]);
+                } else if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
+                    addQuickReplies(botMessageDiv, [
+                        'Tell me about your services',
+                        'How does the design process work?',
+                        'What are your prices?'
+                    ]);
+                }
+            }, 1500);
+        }
+
+        // Send message on button click
+        chatbotSend.addEventListener('click', sendMessage);
+
+        // Send message on Enter key
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Add click event to existing quick replies
+        document.querySelectorAll('.quick-reply').forEach(reply => {
+            reply.addEventListener('click', function() {
+                chatbotInput.value = this.textContent;
+                sendMessage();
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Apply observer to elements
+        document.querySelectorAll('.service-card, .step-card, .testimonial-card, .news-card, .stat-card, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+
+    <!-- Popup Modal -->
+    <div id="popupModal" class="popup-modal">
+        <div class="popup-content">
+            <span class="popup-close-btn" onclick="closePopup()">&times;</span>
+            <h2 class="popup-title">Welcome to BARKI DESIGN STUDIO</h2>
+            <p class="popup-subtitle">Get exclusive design tips and special offers delivered to your inbox!</p>
+            <form class="popup-form" id="popupForm">
+                <div class="form-group">
+                    <label for="popupEmail">Email Address *</label>
+                    <input type="email" id="popupEmail" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="popup-buttons">
+                    <button type="submit" class="popup-btn popup-submit">Subscribe Now</button>
+                    <button type="button" class="popup-btn popup-close" onclick="closePopup()">Maybe Later</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Popup functionality
+        let popupShown = false;
+
+        // Check if user has already subscribed
+        function hasUserSubscribed() {
+            return localStorage.getItem('userSubscribed') === 'true';
+        }
+
+        // Mark user as subscribed
+        function markUserSubscribed() {
+            localStorage.setItem('userSubscribed', 'true');
+            localStorage.setItem('popupClosed', 'true');
+        }
+
+        // Show popup after 3 seconds if user hasn't subscribed
+        setTimeout(() => {
+            if (!popupShown && !hasUserSubscribed()) {
+                showPopup();
+            }
+        }, 3000);
+
+        function showPopup() {
+            document.getElementById('popupModal').style.display = 'block';
+            popupShown = true;
+        }
+
+        function closePopup() {
+            document.getElementById('popupModal').style.display = 'none';
+            localStorage.setItem('popupClosed', 'true');
+        }
+
+        // Handle popup form submission
+        document.getElementById('popupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('popupEmail').value;
+            
+            try {
+                const response = await fetch('/api/popup/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, message: 'Subscribed to newsletter' })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Mark user as permanently subscribed
+                    markUserSubscribed();
+                    
+                    alert('Thank you for subscribing! We\'ll be in touch soon.');
+                    closePopup();
+                    this.reset();
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting popup form:', error);
+                alert('Error: ' + error.message);
+            }
+        });
+
+        // Close popup on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('popupModal');
+            if (event.target === modal) {
+                closePopup();
+            }
+        }
+    </script>
+</body>
+</html>
