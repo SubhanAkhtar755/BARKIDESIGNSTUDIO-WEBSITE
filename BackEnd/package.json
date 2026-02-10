@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon BackEnd/index.js",
     "build": "npm install && npm install --prefix BackEnd && npm install --prefix FrontEnd",
-    "start": "node BackEnd/index.js"
+    "start": "node index.js"
   },
   "type": "module",
   "author": "M.Subhan",
