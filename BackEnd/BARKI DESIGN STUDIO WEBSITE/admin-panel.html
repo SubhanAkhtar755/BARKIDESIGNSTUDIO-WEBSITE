@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - BARKI DESIGN STUDIO</title>
     <link rel="icon" href="./Asste/Image/main header image.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -25,8 +27,7 @@
 
         /* Header */
         .admin-header {
-            background: linear-gradient(135deg, #ef955a 0%, #f77737 100%);
-            color: white;
+            color: black;
             padding: 20px 0;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
@@ -40,6 +41,14 @@
             align-items: center;
         }
 
+        .admin-header-content img {
+            width: 100px;
+            height: 90px;
+          
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
         .admin-header h1 {
             font-size: 24px;
             display: flex;
@@ -48,8 +57,8 @@
         }
 
         .logout-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: rgba(183, 155, 155, 0.2);
+            color: black;
             border: none;
             padding: 10px 20px;
             border-radius: 8px;
@@ -116,8 +125,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Filters */
@@ -450,8 +466,13 @@
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Empty State */
@@ -537,14 +558,14 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="admin-header">
         <div class="admin-header-content">
-            <h1>
-                <i class="fas fa-cogs"></i>
-                Admin Panel
-            </h1>
+
+            <img src="./Asste/Image/BARKI_LOGO__2_-removebg-preview.png" alt="">
+
             <button class="logout-btn" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i>
                 Logout
@@ -690,7 +711,7 @@
             </div>
         </div>
 
-        </div>
+    </div>
     </div>
 
     <script>
@@ -707,7 +728,7 @@
         const itemsPerPage = 10;
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('Admin panel loaded');
             loadContacts();
         });
@@ -715,7 +736,7 @@
         // Tab switching
         function switchTab(tab, element) {
             console.log('Switching to tab:', tab);
-            
+
             // Update tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
@@ -766,9 +787,9 @@
         // Load contacts
         async function loadContacts(page = 1) {
             contactsPage = page;
-            
+
             console.log('Loading contacts...');
-            
+
             try {
                 const response = await fetch(`/api/contact/all?page=${page}&limit=50`);
                 console.log('Contacts response status:', response.status);
@@ -782,7 +803,7 @@
                 }
             } catch (error) {
                 console.error('Error loading contacts:', error);
-                document.getElementById('contacts-loading').innerHTML = 
+                document.getElementById('contacts-loading').innerHTML =
                     '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading contacts</p></div>';
             }
         }
@@ -790,9 +811,9 @@
         // Load orders
         async function loadOrders(page = 1) {
             ordersPage = page;
-            
+
             console.log('Loading orders...');
-            
+
             try {
                 const response = await fetch(`/api/order/all?page=${page}&limit=50`);
                 console.log('Orders response status:', response.status);
@@ -806,7 +827,7 @@
                 }
             } catch (error) {
                 console.error('Error loading orders:', error);
-                document.getElementById('orders-loading').innerHTML = 
+                document.getElementById('orders-loading').innerHTML =
                     '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading orders</p></div>';
             }
         }
@@ -814,7 +835,7 @@
         // Display contacts
         function displayContacts(contacts) {
             console.log('Contacts received:', contacts.length);
-            
+
             const tbody = document.getElementById('contacts-tbody');
             const table = document.getElementById('contacts-table');
             const loading = document.getElementById('contacts-loading');
@@ -841,7 +862,7 @@
                 }
                 tbody.innerHTML = html;
                 console.log('Contacts HTML set, length:', html.length);
-                
+
                 // Store contacts data for modal access
                 window.contactsData = contacts;
             }
@@ -852,16 +873,16 @@
             table.style.opacity = '1';
             table.style.position = 'relative';
             table.style.zIndex = '10';
-            
+
             console.log('Contacts table should be visible now');
         }
 
         // Load popups
         async function loadPopups(page = 1) {
             popupsPage = page;
-            
+
             console.log('Loading popups...');
-            
+
             try {
                 const response = await fetch(`/api/popup/all?page=${page}&limit=50`);
                 console.log('Popups response status:', response.status);
@@ -875,7 +896,7 @@
                 }
             } catch (error) {
                 console.error('Error loading popups:', error);
-                document.getElementById('popups-loading').innerHTML = 
+                document.getElementById('popups-loading').innerHTML =
                     '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading popups</p></div>';
             }
         }
@@ -883,7 +904,7 @@
         // Display popups
         function displayPopups(popups) {
             console.log('Popups received:', popups.length);
-            
+
             const tbody = document.getElementById('popups-tbody');
             const table = document.getElementById('popups-table');
             const loading = document.getElementById('popups-loading');
@@ -900,13 +921,13 @@
                     html += '<td>';
                     html += '<div style="display: flex; align-items: center;">';
                     html += '</div>';
-                  
+
                     html += '<td><span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">New</span></td>';
                     html += '</tr>';
                 }
                 tbody.innerHTML = html;
                 console.log('Popups HTML set, length:', html.length);
-                
+
                 // Store popups data for modal access
                 window.popupsData = popups;
             }
@@ -917,13 +938,13 @@
             table.style.opacity = '1';
             table.style.position = 'relative';
             table.style.zIndex = '10';
-            
+
             console.log('Popups table should be visible now');
         }
         // Display orders
         function displayOrders(orders) {
             console.log('Orders received:', orders.length);
-            
+
             const tbody = document.getElementById('orders-tbody');
             const table = document.getElementById('orders-table');
             const loading = document.getElementById('orders-loading');
@@ -960,7 +981,7 @@
             table.style.opacity = '1';
             table.style.position = 'relative';
             table.style.zIndex = '10';
-            
+
             console.log('Orders table should be visible now');
         }
 
@@ -970,7 +991,7 @@
             const { page, pages } = pagination;
 
             let html = '';
-            
+
             // Previous button
             html += `<button ${page === 1 ? 'disabled' : ''} onclick="load${type === 'contacts' ? 'Contacts' : 'Orders'}(${page - 1})">
                 <i class="fas fa-chevron-left"></i>
@@ -1002,7 +1023,7 @@
                 startDate: document.getElementById('contact-start-date').value,
                 endDate: document.getElementById('contact-end-date').value
             };
-            
+
             loadContacts(1, filters);
         }
 
@@ -1021,7 +1042,7 @@
                 startDate: document.getElementById('order-start-date').value,
                 endDate: document.getElementById('order-end-date').value
             };
-            
+
             loadOrders(1, filters);
         }
 
@@ -1032,7 +1053,7 @@
                 startDate: document.getElementById('popup-start-date').value,
                 endDate: document.getElementById('popup-end-date').value
             };
-            
+
             loadPopups(1, filters);
         }
 
@@ -1060,14 +1081,14 @@
             modal.style.display = 'block';
         }
 
-        
+
         function showMessageModal(index) {
             // Close any existing modal first
             closeModal();
-            
+
             const contact = window.contactsData[index];
             if (!contact) return;
-            
+
             const modal = document.createElement('div');
             modal.className = 'modal';
             modal.innerHTML = `
@@ -1089,7 +1110,7 @@
         }
 
         // Close modal on outside click
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             const modal = document.querySelector('.modal');
             if (event.target === modal) {
                 closeModal();
@@ -1097,4 +1118,5 @@
         }
     </script>
 </body>
+
 </html>

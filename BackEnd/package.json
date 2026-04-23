@@ -4,7 +4,7 @@
   "description": "Osm",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon BackEnd/index.js",
+    "dev": "nodemon index.js",
     "build": "npm install && npm install --prefix BackEnd && npm install --prefix FrontEnd",
     "start": "node index.js"
   },
